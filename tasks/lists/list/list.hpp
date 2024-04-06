@@ -224,12 +224,12 @@ public:
         --size_;
     }
 
-    inline T& Back() {
-        return static_cast<Node*>(sentinel_node_.prevNode_)->value;
-    }
-
     inline T& Front() {
         return static_cast<Node*>(sentinel_node_.nextNode_)->value;
+    }
+
+    inline T& Back() {
+        return static_cast<Node*>(sentinel_node_.prevNode_)->value;
     }
 
     void Insert(Iterator it, const T& value) {
