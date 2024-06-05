@@ -319,21 +319,6 @@ private:
         }
     }
 
-    void DecreaseValues(Node* iter_node, std::vector<std::pair<const Key, Value>>& result_vec) const noexcept {
-        if (iter_node->right_ != nullptr) {
-            this->DecreaseValues(iter_node->right_, result_vec);
-            result_vec.push_back(std::make_pair(iter_node->key_, iter_node->value_));
-            if (iter_node->left_ != nullptr) {
-                this->DecreaseValues(iter_node->left_, result_vec);
-            }
-        } else if (iter_node->left_ != nullptr) {
-            result_vec.push_back(std::make_pair(iter_node->key_, iter_node->value_));
-            this->DecreaseValues(iter_node->left_, result_vec);
-        } else {
-            result_vec.push_back(std::make_pair(iter_node->key_, iter_node->value_));
-        }
-    }
-
     void IncreaseValues(Node* iter_node, std::vector<std::pair<const Key, Value>>& result_vec) const noexcept {
         if (iter_node->left_ != nullptr) {
             this->IncreaseValues(iter_node->left_, result_vec);
@@ -344,6 +329,21 @@ private:
         } else if (iter_node->right_ != nullptr) {
             result_vec.push_back(std::make_pair(iter_node->key_, iter_node->value_));
             this->IncreaseValues(iter_node->right_, result_vec);
+        } else {
+            result_vec.push_back(std::make_pair(iter_node->key_, iter_node->value_));
+        }
+    }
+
+    void DecreaseValues(Node* iter_node, std::vector<std::pair<const Key, Value>>& result_vec) const noexcept {
+        if (iter_node->right_ != nullptr) {
+            this->DecreaseValues(iter_node->right_, result_vec);
+            result_vec.push_back(std::make_pair(iter_node->key_, iter_node->value_));
+            if (iter_node->left_ != nullptr) {
+                this->DecreaseValues(iter_node->left_, result_vec);
+            }
+        } else if (iter_node->left_ != nullptr) {
+            result_vec.push_back(std::make_pair(iter_node->key_, iter_node->value_));
+            this->DecreaseValues(iter_node->left_, result_vec);
         } else {
             result_vec.push_back(std::make_pair(iter_node->key_, iter_node->value_));
         }
